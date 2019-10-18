@@ -3,5 +3,6 @@ I created a basic project for a ESP32 module using Visual Studio Code with the e
 I used a Adafruit OLED, relays and a moisture sensor to combine a couple of tuorials which you can easily find on the interne, when you start to program for esp etc.
 I personally do like VScode a lot more than the Arduino IDE and you can also flash your esp directly from VScode. You can also install libraries with the manager from
 PlatformIO very easy.
+## Install your envoirement
 
 
