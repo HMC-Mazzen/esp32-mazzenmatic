@@ -73,17 +73,8 @@ void displaytexdraw(const String& myString) {
   display.display();
 }
 
-void setup()
-{
-    Serial.begin(115200);
-    
-    pinMode(relais, OUTPUT);
-    digitalWrite(relais, LOW);
-    delay(100);
-
+void wifiSetup() {
     WiFiMulti1.addAP(INC_SSID, INC_PASSWORD);
-    mqttclient.setServer(mqtt_server, 1883);
-    mqttclient.setCallback(callback);
     Serial.print("Waiting for WiFi... ");
     while(WiFiMulti1.run() != WL_CONNECTED) {
         Serial.print(".");
@@ -94,9 +85,19 @@ void setup()
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
     delay(500);
-    
-    startMillis = millis();
+}
 
+void setup()
+{
+    Serial.begin(115200);
+    pinMode(relais, OUTPUT);
+    digitalWrite(relais, LOW);
+    delay(100);
+    wifiSetup();
+    delay(1000);
+    mqttclient.setServer(mqtt_server, 1883);
+    mqttclient.setCallback(callback);
+    startMillis = millis();
     if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
       Serial.println(F("SSD1306 allocation failed"));
       for(;;); 
